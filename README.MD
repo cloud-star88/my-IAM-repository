@@ -40,11 +40,11 @@ Authenticate with Azure:
 Bash
 
 az login
-# Set the target subscription (optional, but recommended)
+(set traget subscription)
 az account set --subscription "Your-Subscription-ID"
 Execute the main deployment script:
 
 Bash
-
-# Review the script (deploy.sh) variables before execution!
+(review script and execute)
 bash deploy.sh
+
