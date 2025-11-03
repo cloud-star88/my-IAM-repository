@@ -1,4 +1,4 @@
-AzURE IAM ROLES AND ACCESS AUTOMATION (CLI/Bash)
+AZURE IAM ROLES AND ACCESS AUTOMATION (CLI/Bash)
 This project provides a set of Bash scripts utilizing the Azure CLI to automate the setup of essential infrastructure and secure Identity and Access Controls (IAM) within Azure. 
 The primary focus is on implementing Azure RBAC (Role-Based Access Control) at a granular level to enforce the principle of least privilege.
 
@@ -47,4 +47,5 @@ Execute the main deployment script:
 Bash
 (review script and execute)
 bash deploy.sh
+
 
