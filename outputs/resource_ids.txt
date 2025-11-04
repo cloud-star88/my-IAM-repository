@@ -1,0 +1,14 @@
+===> GET Subscription ID: az account show --query id -o tsv
+e8cc4b6b-df59-4d98-9916-0c7d7cbbd94e
+
+===>subnetName="DBSubnet"  
+groupId="4cfabba7-e95b-4712-8efb-5695d4545c9f"
+
+===>
+VNET_NAME="MyAppVNet"
+ASSIGNEE="bb4653a9-c08b-4fe8-9458-6b0c70c1ea78"
+
+
+
+
+
