@@ -14,7 +14,7 @@ TASKS:
 
 BONUS: Include scripts to revoke access or remove roles for cleanup, also using a CI/CD pipeline to automate the whole process.
 
-Removte repo link: https://github.com/cloud-star88/my-IAM-repository
+My repo link: https://github.com/cloud-star88/my-IAM-repository
 
 
 
