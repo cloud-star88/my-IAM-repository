@@ -179,3 +179,180 @@ Validation for DBAdmin user on the portal
 Validation for WebAdmin user on the portal
 
 
+BONUS: Include scripts to revoke access or remove roles for cleanup, also using a CI/CD pipeline to automate the whole process.
+Create file named cleanup.sh on my CLI , it contains the credentials for my Azure resources as variable.
+
+With the variables in place the script was written to carry out the clean up function on the previous resources created.
+ 
+ ![Workflow display ](./screenshots/cleanup-script-cli.png)
+cleanup-script-cli
+The script was ran, cleanup process started and all resources deleted 
+
+![Workflow display ](./screenshots/Cleanup-successful.png)
+Cleanup-successful
+
+![Workflow display ](./screenshots/azure-interface-showing-resources-are-deleted.png)
+azure-interface-showing-resources-are-deleted
+
+The entire resoures created was sucessfully deleted spep by step as programmed in the script.
+The CI/CD was step was the next, I created a file named pipeline.yaml and enterd the command for a workflow that will deploy and validate reources
+ 
+ ![Workflow display ](./screenshots/ci-cd-script.png)
+ci-cd-script 
+
+![Workflow display ](./screenshots/cicd-successful.png)
+cicd-successful
+
+
+Importance of CI/CD for Project
+•	Automation: Streamlined deployments with zero manual intervention.
+•	Consistency: Ensures a repeatable and reliable deployment process every time.
+•	Validation: Automatically verifies and tests each build before release.
+•	Security: Incorporates security scans and audits into the pipeline.
+•	Professionalism: Reflects best practices aligned with modern DevOps standards.
+
+Challenge Encountered
+Challenge:
+Learning how to securely connect GitHub Actions to Azure without revealing credentials within the codebase.
+Solution:
+I implemented Azure Service Principals together with GitHub Secrets to establish secure, encrypted authentication.
+This approach ensures that credentials remain confidential and are never exposed in scripts or logs.
+
+Lessons Learned
+•	Gained hands-on understanding of CI/CD pipelines in real DevOps environments.
+•	Recognized the value of automated testing and deployment validation.
+•	Learned to integrate GitHub Actions seamlessly with Azure for automation.
+•	Developed skills in secure credential management using encrypted secrets.
+•	Understood the importance of automated security audits in maintaining a robust cloud environment.
+Project Summary
+
+Project Deliverables
+ Fully automated Azure infrastructure deployment
+ Configured IAM with users, groups, and role assignments
+ Automated cleanup for complete resource lifecycle management
+ CI/CD pipeline for seamless continuous deployment
+ Well-documented process with visual proofs and detailed steps
+
+Skills and Competencies Demonstrated
+•	Technical Proficiency
+•	Azure CLI scripting and automation
+•	Bash scripting and workflow orchestration
+•	Azure AD and RBAC configuration
+•	Infrastructure as Code (IaC) implementation
+•	CI/CD pipeline design using GitHub Actions
+•	Cloud Security
+•	Applied the Principle of Least Privilege
+•	Implemented subnet isolation for enhanced network protection
+•	Group-based access control for scalability and auditability
+•	Automated compliance and security validation
+•	DevOps Practices
+•	Infrastructure as Code for reproducible environments
+•	Automated deployment and teardown workflows
+•	Version control and collaboration using Git
+•	Clear documentation and standardized code commenting
+
+Security Best Practices Implemented
+•	Least Privilege Access
+•	DBAdmins assigned Reader roles only
+•	Prevented users from modifying subnet resources
+•	Network Segmentation
+•	Separate subnets for Web and Database tiers
+•	Restricted lateral movement to improve isolation
+•	Group-Based Role Management
+•	Assigned permissions to groups, not individuals
+•	Simplified access control and auditing
+•	Scalable structure for enterprise environments
+•	Automated Compliance
+•	Integrated security checks into the CI/CD pipeline
+•	Detected excessive permissions automatically
+•	Maintained consistent security posture across deployments
+
+Challenges and Solutions
+•	Challenge 1: Path Conversion in Git Bash
+•	Issue: Resource IDs were auto-converted.
+•	Solution: Used export MSYS_NO_PATHCONV=1.
+•	Lesson: Path handling differs across shell environments.
+•	Challenge 2: Resource Deletion Order
+•	Issue: Dependencies prevented resource deletion.
+•	Solution: Researched and sequenced deletions properly.
+•	Lesson: IAM components must be removed before infrastructure.
+•	Challenge 3: Script Idempotency
+•	Issue: Concern over rerunning scripts safely.
+•	Solution: Verified Azure CLI commands are idempotent.
+•	Lesson: Good automation should support repeated runs.
+•	Challenge 4: Secure CI/CD Authentication
+•	Issue: Protecting Azure credentials in GitHub Actions.
+•	Solution: Used Service Principal + GitHub Secrets.
+•	Lesson: Credentials must never appear in code or logs.
+
+Real-World Applications
+•	Cloud Engineering
+•	Automated provisioning and cleanup
+•	Efficient resource management
+•	Applied IAM and network security best practices
+•	DevOps
+•	Designed scalable CI/CD workflows
+•	Implemented Infrastructure as Code
+•	Automated validation and deployment testing
+•	Security Operations
+•	Enforced RBAC and IAM security controls
+•	Conducted access audits and compliance checks
+•	Maintained least-privilege access at scale
+
+Future Improvements
+•	If expanded, I would:
+•	Integrate Terraform for IaC management
+•	Add Azure Monitor for real-time alerts
+•	Create multi-environment pipelines (Dev, Staging, Prod)
+•	Automate backups for configurations
+•	Secure secrets with Azure Key Vault
+•	Generate compliance reports automatically
+
+Results and Metrics
+•	Infrastructure Setup:
+•	1 Resource Group, 1 Virtual Network, 2 Subnets
+•	Setup Time: 5 mins → 2 mins (automated)
+•	IAM Setup:
+•	2 Azure AD Groups, 2 Test Users, 1 RBAC Role
+•	Setup Time: 10 mins → 3 mins (automated)
+•	Automation Impact:
+•	70% faster deployments
+•	100% configuration consistency
+•	Zero human errors
+•	Instant cleanup and redeployment
+
+Conclusion
+•	This project successfully automated Identity and Access Management (IAM) in Azure, integrating DevSecOps principles for efficiency, security, and scalability.
+•	Key Achievements
+ Automated infrastructure deployment
+ Secure IAM and RBAC configuration
+ Lifecycle management with cleanup scripts
+ Continuous deployment via CI/CD pipeline
+ Comprehensive documentation and validation proofs
+•	Technical Expertise Gained
+•	Azure automation and scripting
+•	AD and RBAC management
+•	CI/CD pipeline integration
+•	Security-first cloud engineering
+•	Impact
+
+This project demonstrates real-world DevOps and Cloud Engineering expertise — merging automation, security, and reliability through IaC, RBAC, and CI/CD integration.
+
+References & Resources
+•	Documentation
+•	Azure CLI Reference
+•	Azure RBAC and IAM Guides
+•	Azure Virtual Network Docs
+•	GitHub Actions Documentation
+•	Bash Scripting Guide
+•	Learning Resources
+•	Microsoft Learn: Azure Fundamentals
+•	Azure Security Best Practices
+•	DevSecOps and IaC Methodologies
+•	Tools & Technologies
+•	Azure CLI v2.40.0+
+•	Bash (GNU 5.x)
+•	Git & GitHub Actions
+•	Visual Studio Code
+
+

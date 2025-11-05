@@ -32,16 +32,21 @@ Azure Active Directory
 ```
 📁 Project Structure
 IAM-Roles-Automation/
+
 ├── outputs/                     # contains Saved account IDs used for the project 
    └── resource_id.txt 
 |── screenshots/                # Visual display of all tasks accomplished
     └──files
 ├── scripts/  
+    ├── cleanup.sh
     ├── create_user.sh          # Creates Users in Azure AD  
     ├── resources.sh            # Creates resources in Azure 
     └── test_user.sh            # creates test users to the AD groups
 ├── document.md                 # Detailed step-by-step documentation of the project with screenshots 
 └── README.md                    # Project overview and guide
+└── .github/
+    └── workflows/
+        └── pipeline.yaml        # CI/CD automation with GitHub Actions
 ```
 
 🛠️ Required Tools
