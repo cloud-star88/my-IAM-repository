@@ -1,145 +1,138 @@
-```Hello, world from Cloud_star88!```
+This project demonstrates the automation of Identity and Access Management (IAM) in Microsoft Azure using Azure CLI and Bash scripting. It showcases how to programmatically create secure, role-based access controls for cloud infrastructure, following DevSecOps best practices.
 
-## Project Structure```My-IAM-Roles-and-Secure-Access-Automation/ |–scripts/ |__iam_automation_scripts.sh  |–outputs/ |__resource_ids.txt |–screenshots/ |__demo_screenshot.png |__README.MD |__PROJECT GROUP4 - ESTHER OLUCHI ISRAEL-OLAWEPO```
+Objectives
 
-PROJECT: IAM-Roles-and-Secure-Access-Automation
-TASKS:
-1.	Create a resource group, virtual network, and subnets (Web and DB).
-2.	Create Azure AD groups: ‘WebAdmin’ and ‘DBAdmin’.
-3.	Assign Reader role to DBAdmins for DB subnet resources.
-4.	Add test users to the AD groups and validate role assignments.
+To automate the creation of Azure Resource Group, Virtual Network, and Subnets
 
-BONUS: Include scripts to revoke access or remove roles for cleanup, also using a CI/CD pipeline to automate the whole process.
+To implement Azure Active Directory (AD) groups for access management
 
- 
-TASK 1:  Create a resource group, virtual network, and subnets (Web and DB)
-1.	I started by creating my folders where my code, dependencies, configurations, architecture, screenshots, deployment and automations steps will be kept.
-2.	I created the root folder first, followed by subfolders 
-3.	Then I opened my Bash CLI
-4.	I opened my Azure GUI on the portal and logged into my account 
+To assign role-based access control (RBAC) using the principle of least privilege
 
-Azure_login_to my_account_on_the_portal.png
+To create test users and validate permission assignments
 
-5.	I opened my azure account on bash using ‘az login’, after that, my subscription name, ID and other details was displayed.
-6.	I typed 1 + ENTER key and my first subscription was selected as default
-7.	I am now being logged into my Azure CLI
+To automate cleanup and resource removal
 
- 
-Azure login to my account in Bash.png
+Implement CI/CD pipeline for continuous deployment
 
-8.	I entered details in one script for my resource group, virtual network and subnets to be created using the  'az commands’ and other instructions.
-9.	When it was created the confirmation and details were listed
-10.	The resource group is also shown on CLI and portal
- 
-Resource Group Successfully Created on CLI.png
+🏗️ Architecture
 
- 
+Azure Subscription
+└── Resource Group (esther_rg)
+    └── Virtual Network (MyAppVnet) [10.0.0.0/16]
+        ├── Web Subnet (WebSubnet) [10.0.1.0/24]
+        └── DB Subnet (DBSubnet) [10.0.2.0/24]
 
-Resource Group Successfully Created on Azure portal.png
+Azure Active Directory
+├── WebAdmins Group (Reader role on Web Subnet)
+│   └── webadmin2
+└── DBAdmins Group (Reader role on DB Subnet)
+    └── dbadmin2
 
-11.	After resource group, the next command followed suite within the same script.
-12.	Using the following variables with other commands the virtual network was successfully created:  
+📁 Project Structure
+IAM-Roles-Automation/
 
- 
-Virtual network creation on CLI
+├── outputs/                     # contains Saved account IDs used for the project
+|   ├── resource_id.txt 
+|
+|── screenshots/                # Visual display of all tasks accomplished
+|
+├── scripts/
+│   ├── create_user.sh          # Creates Users in Azure AD  
+│   ├── resources.sh            # Creates resources in Azure 
+│   └── test_user.sh            # creates test users to the AD groups
+├── document.md                 # Detailed step-by-step documentation of the project with screenshots
+│   
+└── README.md                    # Project overview and guide
+.github/
+    └── workflows/
+        └── pipeline.yaml        # CI/CD automation with GitHub Actions
 
- 
-Virtual network created in Azure portal
+🛠️ Required Tools
+Azure cloud platform
+Azure CLI 
+Bash Shell (Git Bash on Windows)
+Powershell CLI
+Azure Subscription with appropriate permissions
+VS Code - code editor
 
- 
-Subnet creation CLI
+Permissions for Azure account: 
+Account must have owners role in the subscription
+Account must have a global user permissions in order to create Azure AD users and groups
+Permissions to assign RBAC roles
+Verify Azure Login az login az account show
 
- 
-Subnet created in Azure portal
-TASK 2: Create Azure AD groups for WebAdmin and DBAdmin
-One the same script, the command for AD group creation ran after the previous command, and the AD Group for WebAdmin and DBAdmin was created.
+After Making Directory.
 
- 			AD Group for WebAdmin and DBAdmin on CLI
+step 1: cd IAM Roles Automation
 
-The command 'az ad group list –output table’ was ran on CLI to show the two AD groups are present.
-Checking the portal as well confirms the two AD groups are present
- 
-AD Group for WebAdmin and DBAdmin in the portal
-Searching for 'Microsoft Entra ID' on the search bar, under management shows two AD Groups.
-TASK 3: Assign Reader role to DBAdmins for DBSubnet resources 
-The script to assign roll followed on but was not successful, as Bash was unable to process this command despite all credentials made available. 
+Step 2: create scripts and make Scripts Executable
 
-Image below shows the errors encountered trying to assign DBAdmins for DBSubnet resources.
- 
-Role assignment page on CLI
-I decided to try Powershell. I created a script named asignrole.ps1 and saved it I used az login to access my account from powershell
- 
+Step 3: Set Your Subscription 
 
-Login to my Azure account from Powershell
+Find your subscription ID:
 
+az account show --query id -o tsv
 
+Step 4: Deploy Infrastructure
 
- 
+Creates:
 
-first error encountered trying to run same command on powershell as used in bash, I corrected it using backward slash.
-•	I tried again and another error was flagged, indicating that running script on the system is disabled.
-•	I checked for how to rectify it, and I ran the command to install module.
-(Install-Module -Name Az -AllowClobber -Scope CurrentUser -Force)
+Resource Group iam-role-automation in eastus region
 
- 
+Virtual Network MyWebVNet
 
-Module installed in PowerShell
+Web Subnet Webubnet
 
+DB Subnet dbSubnet
 
-•	Followed by this to set execution policy
-(Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser)
- 
-Instruction to Set-ExecutionPolicy to allow role assign
-•	I ran a command to get my azure subscription ID but saw an error message due to an omission of subscription ID which I added and the system requested I login again and I did and selected my subscription from the list of subscriptions displayed.
-•	I ran the following command to get subscription and this time it worked.
-(Get-AzSubscription Set-AzContext -SubscriptionId "your-subscription-id")
- 
-PowerShell connected to my Azure account after entering Connect-AzAccount
-•	I ran the role assign script on powershell for the last time and the roles for DBAdmin under DBSubnet was successfully assigned.
+Step 5: Deploy IAM Configuration
 
- 
-Script to assign role in PowerShell created
-•	The roles was successfully assigned to DBAdmin for DBSubnet
- 
-Role name and ID created
-•	Role is confirmed on my Azure portal
- 
-Role is assigned to DBAdmin 
-TASK 4: Add test users to the AD groups and validate role assignments.
-•	For this task, I created another PowerShell script titled create.user.ps1 and wrote my script into it to perform the required function.
-•	I ran the script and there was an error, the error persisted until I decided to separate the script to carry out the separate assignments in the task.
-•	I created another script, named it test_users.ps1, adjusted code and ran.
-•	I ran them separately and the following are my results.		
- 
-AD test users for WebAdmin and DBAdmin created
- 
-AD test users for WebAdmin and DBAdmin created the portal
-•	I made adjustments to the contents of the second script named test_users.ps1 which is mean to validate role assignments.
-•	It ran successfully when I sent the command.
- 
-Getting ID for role assignment
+Creates and Configure:
+
+Azure AD groups: WebAdmins and DBAdmins
+
+Test users: webadmin2 and dbadmin2
+
+Role assignments (Reader on DB Subnet for DBAdmins)
+
+Step 6: Validate Deployment
+
+🧹 Cleanup Process
+
+⚠️ WARNING: This will delete all resources created by this project.
+
+Run:
+
+./scripts/cleanup.sh
+
+This script:
+
+Removes role assignments
+
+Removes users from groups
+
+Deletes Azure AD users and groups
+
+Deletes the Resource Group (including VNet and Subnets)
 
 
- 
-test admins added for role assignment
- 
-validation in process
+Project Information
+
+Project: IAM Roles and Secure Access Automation (Group 4)
+
+Technologies: Azure CLI, Bash, PowerShell, Azure AD, RBAC, GitHub Actions
+
+Region: eastus
+
+Date: October to November 2025
 
 
+Additional Information
 
-validation completed
- 
-Validation password displayed
+Azure CLI Documentation
 
+Azure RBAC Documentation
 
+Bash Scripting Guide
 
- 
-Validation for DBAdmin user on the portal
- 
-Validation for WebAdmin user on the portal
-
-![Demo Screenshot](screenshots/demo_screenshot1.png,)
-![Demo Screenshot](screenshots/demo_screenshot2.png,)
-
-
-
+For full technical walkthrough, cleanup validation, and all screenshots — see docs/documentation.md.
