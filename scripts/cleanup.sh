@@ -15,8 +15,6 @@ WEB_AD_GROUP_NAME="WebAdmin2"
 WEB_TEST_USER="webadmin2@estygold226gmail.onmicrosoft.com"
 DB_TEST_USER="dbadmin2@estygold226gmail.onmicrosoft.com"
 
-# Skip role cleanup flag (optional)
-SKIP_ROLE_ASSIGN=${SKIP_ROLE_ASSIGN:-false}
 
 print_message() {
   echo "=============================="
@@ -30,9 +28,8 @@ print_message "Starting Azure IAM Cleanup..."
 echo "Setting active subscription..."
 az account set --subscription "$SUBSCRIPTION_ID"
 
-# -----------------------------------------------------------
-# Step 1: Remove Reader role from DBAdmins on DB subnet
-# -----------------------------------------------------------
+print_message "Step 1: Remove Reader role from DBAdmins on DB subnet"
+
 echo "Getting DB subnet resource ID..."
 DB_SUBNET_ID=$(az network vnet subnet show \
   --resource-group "$RESOURCE_GROUP" \
@@ -59,10 +56,9 @@ else
   echo "DB subnet not found or role cleanup skipped."
 fi
 
-# -----------------------------------------------------------
-# Step 2: Remove users from groups and delete groups
-# -----------------------------------------------------------
-print_message "Removing users from groups and deleting groups..."
+print_message "Step 2: Remove users from groups and delete groups"
+
+echo "Removing users from groups and deleting groups..."
 
 # Remove and delete WebAdmin2 group
 if az ad group show --group "$WEB_AD_GROUP_NAME" >/dev/null 2>&1; then
@@ -88,17 +84,16 @@ else
   echo "DBAdmins group not found, skipping."
 fi
 
-# -----------------------------------------------------------
-# Step 3: Delete test users
-# -----------------------------------------------------------
+
+print_message "Step 3: Delete test users"
+
 echo "Deleting test users..."
 az ad user delete --id "$WEB_TEST_USER" || true
 az ad user delete --id "$DB_TEST_USER" || true
 
-# -----------------------------------------------------------
-# Step 4: Delete resource group (includes VNet and subnets)
-# -----------------------------------------------------------
-print_message "Deleting resource group: $RESOURCE_GROUP"
+print_message Step 4: Delete resource group including VNet and subnets
+
+echo "Deleting resource group: $RESOURCE_GROUP"
 az group delete --name "$RESOURCE_GROUP" --yes --no-wait || true
 
-print_message "CLEANUP COMPLETE."
+echo "CLEANUP COMPLETE."
