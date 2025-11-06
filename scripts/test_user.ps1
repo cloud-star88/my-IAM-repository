@@ -1,6 +1,6 @@
-#----------------------------------
-# Add test users to AD groups 
-#---------------------------------
+#=========================================
+# Validate role assignments for test users
+#=========================================
 
 # Stop on errors
 $ErrorActionPreference = "Stop"
