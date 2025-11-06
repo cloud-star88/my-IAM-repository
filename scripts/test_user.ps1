@@ -1,4 +1,6 @@
-#creating test users to the AD groups 
+#----------------------------------
+# Add test users to AD groups 
+#---------------------------------
 
 # Stop on errors
 $ErrorActionPreference = "Stop"
